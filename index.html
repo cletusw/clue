@@ -186,11 +186,13 @@
             document.querySelector('.weapons-tab').addEventListener('mousedown', weaponsTabHandler);
             document.querySelector('.rooms-tab').addEventListener('touchstart', roomsTabHandler);
             document.querySelector('.rooms-tab').addEventListener('mousedown', roomsTabHandler);
-            document.addEventListener('touchstart', (event) => {
+            function overlayHandler(event) {
                 if (event.target.classList.contains('overlay')) {
                     event.target.classList.toggle('selected');
                 }
-            });
+            }
+            document.addEventListener('touchstart', overlayHandler);
+            document.addEventListener('mousedown', overlayHandler);
         </script>
     </body>
 </html>
