@@ -153,7 +153,7 @@
             const people = document.querySelector('.people');
             const weapons = document.querySelector('.weapons');
             const rooms = document.querySelector('.rooms');
-            document.querySelector('.people-tab').addEventListener('touchstart', (event) => {
+            function peopleTabHandler(event) {
                 for (const tab of tabs) {
                     tab.classList.remove('selected');
                 }
@@ -161,8 +161,8 @@
                 people.classList.add('selected');
                 weapons.classList.remove('selected');
                 rooms.classList.remove('selected');
-            });
-            document.querySelector('.weapons-tab').addEventListener('touchstart', (event) => {
+            }
+            function weaponsTabHandler(event) {
                 for (const tab of tabs) {
                     tab.classList.remove('selected');
                 }
@@ -170,8 +170,8 @@
                 people.classList.remove('selected');
                 weapons.classList.add('selected');
                 rooms.classList.remove('selected');
-            });
-            document.querySelector('.rooms-tab').addEventListener('touchstart', (event) => {
+            }
+            function roomsTabHandler(event) {
                 for (const tab of tabs) {
                     tab.classList.remove('selected');
                 }
@@ -179,7 +179,13 @@
                 people.classList.remove('selected');
                 weapons.classList.remove('selected');
                 rooms.classList.add('selected');
-            });
+            }
+            document.querySelector('.people-tab').addEventListener('touchstart', peopleTabHandler);
+            document.querySelector('.people-tab').addEventListener('mousedown', peopleTabHandler);
+            document.querySelector('.weapons-tab').addEventListener('touchstart', weaponsTabHandler);
+            document.querySelector('.weapons-tab').addEventListener('mousedown', weaponsTabHandler);
+            document.querySelector('.rooms-tab').addEventListener('touchstart', roomsTabHandler);
+            document.querySelector('.rooms-tab').addEventListener('mousedown', roomsTabHandler);
             document.addEventListener('touchstart', (event) => {
                 if (event.target.classList.contains('overlay')) {
                     event.target.classList.toggle('selected');
