@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            html,
+            body {
+                overflow: hidden;
+            }
+            section {
+                display: none;
+            }
+            section.selected {
+                display: inline-grid;
+            }
+            img {
+                height: 100vh;
+                width: 100vw;
+                object-fit: contain;
+            }
+            .overlay {
+                background: white;
+                opacity: 0.2;
+            }
+            .overlay.selected {
+                opacity: 0.8;
+            }
+            .people,
+            .weapons {
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .rooms {
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            }
+            .people-image,
+            .weapons-image {
+                grid-area: 1 / 1 / 3 / 4;
+            }
+            .rooms-image {
+                grid-area: 1 / 1 / 4 / 6;
+            }
+            .people-overlay:nth-of-type(1),
+            .weapons-overlay:nth-of-type(1) {
+                grid-area: 1 / 1 / 2 / 2;
+            }
+            .people-overlay:nth-of-type(2),
+            .weapons-overlay:nth-of-type(2) {
+                grid-area: 1 / 2 / 2 / 3;
+            }
+            .people-overlay:nth-of-type(3),
+            .weapons-overlay:nth-of-type(3) {
+                grid-area: 1 / 3 / 2 / 4;
+            }
+            .people-overlay:nth-of-type(4),
+            .weapons-overlay:nth-of-type(4) {
+                grid-area: 2 / 1 / 3 / 2;
+            }
+            .people-overlay:nth-of-type(5),
+            .weapons-overlay:nth-of-type(5) {
+                grid-area: 2 / 2 / 3 / 3;
+            }
+            .people-overlay:nth-of-type(6),
+            .weapons-overlay:nth-of-type(6) {
+                grid-area: 2 / 3 / 3 / 4;
+            }
+
+            .rooms-overlay:nth-of-type(1) {
+                grid-area: 1 / 1 / 2 / 2;
+            }
+            .rooms-overlay:nth-of-type(2) {
+                grid-area: 1 / 2 / 2 / 3;
+            }
+            .rooms-overlay:nth-of-type(3) {
+                grid-area: 1 / 3 / 2 / 4;
+            }
+            .rooms-overlay:nth-of-type(4) {
+                grid-area: 1 / 4 / 2 / 5;
+            }
+            .rooms-overlay:nth-of-type(5) {
+                grid-area: 1 / 5 / 2 / 6;
+            }
+            .rooms-overlay:nth-of-type(6) {
+                grid-area: 2 / 1 / 3 / 2;
+            }
+            .rooms-overlay:nth-of-type(7) {
+                grid-area: 2 / 2 / 3 / 3;
+            }
+            .rooms-overlay:nth-of-type(8) {
+                grid-area: 2 / 3 / 3 / 4;
+            }
+            .rooms-overlay:nth-of-type(9) {
+                grid-area: 2 / 4 / 3 / 5;
+            }
+
+            .tablist {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 80px;
+                display: flex;
+                justify-content: center;
+            }
+            .tab {
+                flex: 1;
+                max-width: 200px;
+            }
+            .tab.selected {
+                background: orange;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="people selected">
+            <img class="people-image" src="img/people.jpg">
+            <div class="overlay people-overlay"></div>
+            <div class="overlay people-overlay"></div>
+            <div class="overlay people-overlay"></div>
+            <div class="overlay people-overlay"></div>
+            <div class="overlay people-overlay"></div>
+            <div class="overlay people-overlay"></div>
+        </section>
+        <section class="weapons">
+            <img class="weapons-image" src="img/weapons.jpg">
+            <div class="overlay weapons-overlay"></div>
+            <div class="overlay weapons-overlay"></div>
+            <div class="overlay weapons-overlay"></div>
+            <div class="overlay weapons-overlay"></div>
+            <div class="overlay weapons-overlay"></div>
+            <div class="overlay weapons-overlay"></div>
+        </section>
+        <section class="rooms">
+            <img class="rooms-image" src="img/rooms.jpg">
+            <div class="overlay rooms-overlay"></div>
+            <div class="overlay rooms-overlay"></div>
+            <div class="overlay rooms-overlay"></div>
+            <div class="overlay rooms-overlay"></div>
+            <div class="overlay rooms-overlay"></div>
+            <div class="overlay rooms-overlay"></div>
+            <div class="overlay rooms-overlay"></div>
+            <div class="overlay rooms-overlay"></div>
+            <div class="overlay rooms-overlay"></div>
+        </section>
+        <section class="tablist">
+            <button class="tab people-tab selected">People</button>
+            <button class="tab weapons-tab">Weapons</button>
+            <button class="tab rooms-tab">Rooms</button>
+        </section>
+
+        <script>
+            const tabs = document.querySelectorAll('.tab');
+            const people = document.querySelector('.people');
+            const weapons = document.querySelector('.weapons');
+            const rooms = document.querySelector('.rooms');
+            document.querySelector('.people-tab').addEventListener('touchstart', (event) => {
+                for (const tab of tabs) {
+                    tab.classList.remove('selected');
+                }
+                event.target.classList.add('selected');
+                people.classList.add('selected');
+                weapons.classList.remove('selected');
+                rooms.classList.remove('selected');
+            });
+            document.querySelector('.weapons-tab').addEventListener('touchstart', (event) => {
+                for (const tab of tabs) {
+                    tab.classList.remove('selected');
+                }
+                event.target.classList.add('selected');
+                people.classList.remove('selected');
+                weapons.classList.add('selected');
+                rooms.classList.remove('selected');
+            });
+            document.querySelector('.rooms-tab').addEventListener('touchstart', (event) => {
+                for (const tab of tabs) {
+                    tab.classList.remove('selected');
+                }
+                event.target.classList.add('selected');
+                people.classList.remove('selected');
+                weapons.classList.remove('selected');
+                rooms.classList.add('selected');
+            });
+            document.addEventListener('touchstart', (event) => {
+                if (event.target.classList.contains('overlay')) {
+                    event.target.classList.toggle('selected');
+                }
+            });
+        </script>
+    </body>
+</html>
