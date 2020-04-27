@@ -183,19 +183,26 @@
                 weapons.classList.remove('selected');
                 rooms.classList.add('selected');
             }
-            document.querySelector('.people-tab').addEventListener('touchstart', peopleTabHandler);
-            document.querySelector('.people-tab').addEventListener('mousedown', peopleTabHandler);
-            document.querySelector('.weapons-tab').addEventListener('touchstart', weaponsTabHandler);
-            document.querySelector('.weapons-tab').addEventListener('mousedown', weaponsTabHandler);
-            document.querySelector('.rooms-tab').addEventListener('touchstart', roomsTabHandler);
-            document.querySelector('.rooms-tab').addEventListener('mousedown', roomsTabHandler);
+            document.querySelector('.people-tab').addEventListener('touchstart', preventDefault(peopleTabHandler), {passive: false});
+            document.querySelector('.people-tab').addEventListener('mousedown', peopleTabHandler, {passive: false});
+            document.querySelector('.weapons-tab').addEventListener('touchstart', preventDefault(weaponsTabHandler), {passive: false});
+            document.querySelector('.weapons-tab').addEventListener('mousedown', weaponsTabHandler, {passive: false});
+            document.querySelector('.rooms-tab').addEventListener('touchstart', preventDefault(roomsTabHandler), {passive: false});
+            document.querySelector('.rooms-tab').addEventListener('mousedown', roomsTabHandler, {passive: false});
             function overlayHandler(event) {
                 if (event.target.classList.contains('overlay')) {
                     event.target.classList.toggle('selected');
                 }
             }
-            document.addEventListener('touchstart', overlayHandler);
-            document.addEventListener('mousedown', overlayHandler);
+            document.addEventListener('touchstart', preventDefault(overlayHandler), {passive: false});
+            document.addEventListener('mousedown', overlayHandler, {passive: false});
+
+            function preventDefault(handler) {
+                return function(event, ...args) {
+                    event.preventDefault();
+                    return handler(event, ...args);
+                };
+            }
         </script>
     </body>
 </html>
